@@ -1,0 +1,74 @@
+<ion-header [translucent]="true"><script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyCR1zEwfTIMn9ekpkppeoC25mS_jmenjCs"></script>
+  <ion-toolbar color="primary">
+    <ion-title>
+      GPS location tracking
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-item>
+    <input size="35" type="text" class="native-input sc-ion-input-ios" (keydown.enter)="$event.preventDefault()" placeholder="Enter destination" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
+  </ion-item>
+
+  <ion-item>
+    <ion-label><b>Destination address</b></ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>Address: {{ dest_address }}</ion-label>
+  </ion-item>
+
+  <ion-item>
+    <ion-label *ngIf="!flag_dest"><b>Location of active nodes</b></ion-label>
+  </ion-item>
+
+  <div #map id="map" [hidden]="!user"></div>
+
+  <div *ngIf="user">
+
+    <ion-button expand="block" (click)="startTracking()" *ngIf="!isTracking">
+      <ion-icon name="locate" slot="end"></ion-icon>
+      Start GPS Tracking
+    </ion-button>
+
+    <ion-button expand="block" (click)="stopTracking()" *ngIf="isTracking">
+      <ion-icon name="hand-right-outline" slot="end"></ion-icon>
+      Stop GPS Tracking
+    </ion-button>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-item>
+            <ion-label><b>Current GPS location</b></ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-item>
+            <ion-label>Latitude: {{ latitude }}</ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-item>
+            <ion-label>Longitude: {{longitude}}</ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </div>
+  <ion-button expand="block" (click)="routeTrackingStart()" *ngIf="!flag_routing">
+    <ion-icon name="arrow-forward-outline" slot="end"></ion-icon>
+    Start Route Tracking
+  </ion-button>
+  <ion-button expand="block" (click)="routeTrackingStop()" *ngIf="flag_routing">
+    <ion-icon name="close" slot="end"></ion-icon>
+    Stop Route Tracking
+  </ion-button>
+
+</ion-content>

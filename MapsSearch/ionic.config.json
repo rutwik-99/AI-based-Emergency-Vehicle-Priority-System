@@ -1,0 +1,7 @@
+{
+  "name": "MapsSearch",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
